@@ -4,7 +4,7 @@
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
  *
- *  @author
+ *  @author Dervla Brennan
  *  @version HT 2019
  */
 
@@ -17,9 +17,27 @@
      * @return array sorted in ascending order.
      *
      */
-    static double [] insertionSort (double a[]){
-
-        //todo: implement the sort
+    static double [] insertionSort (double a[])
+    {
+    	if(a != null)
+    	{
+    		double temp;
+        	for(int i = 1; i < a.length; i++)
+        	{
+        		for(int j = i; j > 0; j--)
+        		{
+        			if(a[j] < a[j-1])
+        			{
+        				temp = a[j];
+        				a[j] = a[j-1];
+        				a[j-1] = temp;
+        			}
+        		}
+        		
+        	}
+        	return a;
+    	}
+    	return null;
     }//end insertionsort
 
     /**
@@ -29,12 +47,61 @@
      * @return array sorted in ascending order
      *
      */
-    static double [] quickSort (double a[]){
-	
-		 //todo: implement the sort
-
+    
+    static double [] quickSort (double a[])
+    {
+    	if(a != null)
+    	{
+    		int low = 0;
+    		int high = a.length-1;
+    		qSort(a, low, high);
+    		return a;
+    	}
+    	return null;
     }//end quicksort
 
+    private static void qSort (double a[], int lo, int hi)
+    {
+    	/*if(lo >= hi)
+    	{
+    		return;
+    	}*/
+    	//get pivot val
+    	int mid = lo + (hi - lo)/2;
+    	double pivot = a[mid];
+    	
+    	int i = lo;
+    	int j = hi;
+    	
+    	while (i <= j)
+    	{
+    		while(a[i] < pivot)
+    		{
+    			i++;
+    		}
+    		while(a[j] > pivot)
+    		{
+    			j--;
+    		}
+    		if(i <= j)
+    		{
+    			double temp = a[i];
+    			a[i] = a[j];
+    			a[j] = temp;
+    			i++;
+    			j--;
+    		}
+    	}
+    	//recursively sort the two partitions
+    	if(lo < j)
+    	{
+    		qSort(a, lo, j);
+    	}
+    	if(hi > i)
+    	{
+    		qSort(a, i, hi);
+    	}
+    }
     /**
      * Sorts an array of doubles using Merge Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
@@ -50,11 +117,11 @@
      * @return after the method returns, the array must be in ascending sorted order.
      */
 
-    static double[] mergeSortIterative (double a[]) {
+    /*static double[] mergeSortIterative (double a[]) {
 
 		 //todo: implement the sort
 	
-    }//end mergesortIterative
+    }//end mergesortIterative*/
     
     
     
@@ -65,13 +132,13 @@
      * @param a: An unsorted array of doubles.
      * @return after the method returns, the array must be in ascending sorted order.
      */
-    static double[] mergeSortRecursive (double a[]) {
+   /* static double[] mergeSortRecursive (double a[]) {
     	
 
     	//todo: implement the sort
 	
    }//end mergeSortRecursive
-    	
+    	*/
     
     /**
      * Sorts an array of doubles using Selection Sort.
@@ -80,19 +147,37 @@
      * @return array sorted in ascending order
      *
      */
-    static double [] selectionSort (double a[]){
-
-         //todo: implement the sort
-
+    static double [] selectionSort (double a[])
+    {
+    	if(a != null)
+    	{
+    		for (int i = 0; i < a.length; i++)
+        	{
+        		int min = i;
+        		for (int j = i + 1; j < a.length; j++)
+        		{
+        			if(a[j] < a[min])
+        			{
+        				min = j;
+        			}
+        		}
+        		double temp = a[min];
+        		a[min] = a[i];
+        		a[i] = temp;
+        	}
+        	return a;
+    	}
+    	return null;
+    	
     }//end selectionsort
 
    
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         //todo: do experiments as per assignment instructions
-    }
+    }*/
 
  }//end class
 
