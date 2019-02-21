@@ -116,13 +116,25 @@
      * @param a: An unsorted array of doubles.
      * @return after the method returns, the array must be in ascending sorted order.
      */
-
-    /*static double[] mergeSortIterative (double a[]) {
-
-		 //todo: implement the sort
-	
+    //bottom up
+    static double[] mergeSortIterative (double a[]) 
+    {
+    	if(a != null)
+    	{
+    		int size = a.length;
+        	double [] auxiliary = new double[size];
+        	for(int s = 1; s < size; s = s+s)
+        	{
+        		for(int l = 0; l < size - s; l += s+s)
+        		{
+        			merge(a, auxiliary, l, l+s-1, Math.min(l+s+s-1, size-1));
+        		}
+        	}
+        	return a;
+    	}
+    	return null;
     }//end mergesortIterative*/
-    
+   
     
     
     /**
@@ -132,13 +144,55 @@
      * @param a: An unsorted array of doubles.
      * @return after the method returns, the array must be in ascending sorted order.
      */
-   /* static double[] mergeSortRecursive (double a[]) {
-    	
+    //top down
+    static double[] mergeSortRecursive (double a[]) 
+    {
+    	if(a != null)
+    	{
+    		double [] aux = new double[a.length];
+    		msort(a, aux, 0, a.length - 1);
+    		return a;
+    	}
+    	return null;
+    }//end mergeSortRecursive
 
-    	//todo: implement the sort
-	
-   }//end mergeSortRecursive
-    	*/
+    private static void msort(double [] a, double [] aux, int lo, int hi)
+    {
+    	if(hi <= lo) return;
+    	int mid = lo + (hi - lo)/2;
+    	msort(a, aux, lo, mid);
+    	msort(a, aux, mid + 1, hi);
+    	merge(a, aux, lo, mid, hi);
+    }
+
+    private static void merge(double [] a, double[] aux, int lo, int mid, int hi)
+    {
+    	for(int k = lo; k <= hi; k++)
+    	{
+    		aux[k] = a[k];
+    	}
+    	int i = lo, j = mid + 1;
+    	for(int k = lo; k <= hi; k++)
+    	{
+    		if(i > mid)
+    		{
+    			a[k] = aux[j++];
+    		}
+    		else if(j > hi)
+    		{
+    			a[k] = aux[i++];
+    		}
+    		else if(aux[j] < aux[i])
+    		{
+    			a[k] = aux[j++];
+    		}
+    		else
+    		{
+    			a[k] = aux[i++];
+    		}
+    	}
+    }
+    
     
     /**
      * Sorts an array of doubles using Selection Sort.

@@ -38,6 +38,8 @@ public class SortComparisonTest
     	assertNull(SortComparison.insertionSort(array));
     	assertNull(SortComparison.selectionSort(array));
     	assertNull(SortComparison.quickSort(array));
+    	assertNull(SortComparison.mergeSortIterative(array));
+    	assertNull(SortComparison.mergeSortRecursive(array));
     }
 
 
@@ -79,6 +81,31 @@ public class SortComparisonTest
     	double [] expResult2 = {1,1,2,4,5,7};
     	assertTrue(Arrays.equals(expResult2, SortComparison.selectionSort(array2)));
     }
+    
+    @Test
+    public void testMergeIterative()
+    {
+    	double [] array = {3,2,1};
+    	double [] expResult = {1,2,3};
+    	assertTrue(Arrays.equals(expResult, SortComparison.mergeSortIterative(array)));
+    	
+    	double [] array2 = {4,5,1,7,2,1};
+    	double [] expResult2 = {1,1,2,4,5,7};
+    	assertTrue(Arrays.equals(expResult2, SortComparison.mergeSortIterative(array2)));
+    }
+    
+    @Test
+    public void testMergeRecursive()
+    {
+    	double [] array = {3,2,1};
+    	double [] expResult = {1,2,3};
+    	assertTrue(Arrays.equals(expResult, SortComparison.mergeSortRecursive(array)));
+    	
+    	double [] array2 = {4,5,1,7,2,1};
+    	double [] expResult2 = {1,1,2,4,5,7};
+    	assertTrue(Arrays.equals(expResult2, SortComparison.mergeSortRecursive(array2)));
+    }
+
 
     // ----------------------------------------------------------
     /**
