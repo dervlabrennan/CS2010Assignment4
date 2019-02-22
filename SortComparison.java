@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 // -------------------------------------------------------------------------
 
 /**
@@ -226,12 +231,78 @@
     }//end selectionsort
 
    
+    public static void main(String[] args)
+    {
+    	String [] files = {"src/numbers10.txt", "src/numbers100.txt", "src/numbers1000.txt", "src/numbers1000Duplicates.txt",
+    							"src/numbersNearlyOrdered1000.txt", "src/numbersReverse1000.txt", "src/numbersSorted1000.txt"};
+    	SortComparisonTest.main(files); 
+    } 
 
-
-    /*public static void main(String[] args) {
-
-        //todo: do experiments as per assignment instructions
-    }*/
-
+    static double [] readFile(String url, int length)
+    {
+    	double[] numberArray = new double [length];
+    	try
+		{
+			FileReader fileReader = new FileReader(url);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			boolean endOfFile = false;
+			int i = 0;
+			while(!endOfFile)
+			{
+				String numberData = bufferedReader.readLine();
+				if(numberData == null)
+				{
+					endOfFile = true;
+				}
+				else
+				{ 
+					numberArray[i] = Double.parseDouble(numberData);
+					i++;
+				}
+			}
+		}
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		return numberArray;
+    }
+    
+    static int elemsInFile(String url)
+    {
+    	int count = 0;
+    	try
+    	{
+    		FileReader fileReader = new FileReader(url);
+    		BufferedReader bufferedReader = new BufferedReader(fileReader);
+    		boolean endOfFile = false;
+    		while(!endOfFile)
+    		{
+    			String numberData = bufferedReader.readLine();
+    			if(numberData == null)
+    			{
+    				endOfFile = true;
+    			}
+    			else
+    			{ 
+    				count++;
+    			}
+    		}
+    	}
+    	catch(FileNotFoundException e)
+    	{
+    		e.printStackTrace();
+    	}
+    	catch(IOException e)
+    	{
+    		e.printStackTrace();
+    	}
+    	return count;
+    }  
+   
  }//end class
 
